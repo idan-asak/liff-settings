@@ -151,8 +151,8 @@
             const app = document.getElementById("app");
 
             let timeOptions = '<option value="">指定しない</option>';
-            for (let h = 3; h <= 9; h++) {
-                for (let m = 0; m < 60; m += 15) {
+            for (let h = 3; h <= 10; h++) {
+                for (let m = 0; m < 60; m += 30) {
                     const val = String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
                     const sel = currentProfile && currentProfile.wake_time === val ? "selected" : "";
                     timeOptions += `<option value="${val}" ${sel}>${val}</option>`;
