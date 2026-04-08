@@ -16,15 +16,17 @@
             padding: 20px;
         }
         .container { width: 100%; max-width: 400px; margin-top: 10px; }
-        .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .card-header { text-align: center; margin-bottom: 20px; }
-        .card-header h1 { font-size: 20px; color: #333; }
-        .card-header p { font-size: 13px; color: #888; margin-top: 4px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px; }
+        .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .section-title {
+            font-size: 15px; font-weight: 700; color: #333; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .section-title .icon { font-size: 20px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; }
         .form-group select, .form-group input[type="text"] {
-            width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;
-            font-size: 16px; color: #333; background: #fafafa; appearance: none; -webkit-appearance: none;
+            width: 100%; padding: 11px; border: 2px solid #e0e0e0; border-radius: 10px;
+            font-size: 15px; color: #333; background: #fafafa; appearance: none; -webkit-appearance: none;
         }
         .form-group select:focus, .form-group input[type="text"]:focus { outline: none; border-color: #43e97b; background: white; }
         .select-wrapper { position: relative; }
@@ -37,35 +39,17 @@
         .activity-btn.selected { border-color: #43e97b; background: #e8faf0; color: #2d8a56; font-weight: 600; }
         .free-text { width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; color: #333; background: #fafafa; margin-top: 8px; }
         .free-text:focus { outline: none; border-color: #43e97b; background: white; }
-        .reminder-hint { font-size: 12px; color: #888; margin-top: 6px; line-height: 1.5; }
-        .reminder-hint.stop { color: #e65100; }
-        .btn-save {
-            width: 100%; padding: 14px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 8px;
-        }
-        .btn-save:active { opacity: 0.8; }
-        .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
-        .preview { background: #f8f9fa; border-radius: 10px; padding: 16px; margin-top: 16px; text-align: center; }
-        .preview-label { font-size: 12px; color: #888; margin-bottom: 6px; }
-        .preview-text { font-size: 16px; color: #333; font-weight: 600; }
-        .loading { text-align: center; padding: 60px 20px; color: white; font-size: 16px; }
-        .loading-spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .success-msg { text-align: center; padding: 40px 20px; }
-        .success-msg .icon { font-size: 48px; margin-bottom: 12px; }
-        .success-msg p { color: #333; font-size: 16px; line-height: 1.6; }
-        .error-msg { text-align: center; padding: 40px 20px; }
-        .error-msg p { color: #666; font-size: 14px; line-height: 1.6; }
+        .hint { font-size: 11px; color: #999; margin-top: 4px; line-height: 1.5; }
+        .hint.stop { color: #e65100; }
+        .preview { background: #f0f7f0; border-radius: 10px; padding: 14px; text-align: center; }
+        .preview-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+        .preview-text { font-size: 15px; color: #333; font-weight: 600; }
         .toggle-row {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 0; border-bottom: 1px solid #f0f0f0;
+            display: flex; align-items: center; justify-content: space-between; padding: 4px 0;
         }
-        .toggle-row:last-child { border-bottom: none; }
         .toggle-label { font-size: 14px; color: #333; }
-        .toggle-desc { font-size: 12px; color: #888; margin-top: 2px; }
-        .toggle-switch {
-            position: relative; width: 48px; height: 28px; flex-shrink: 0;
-        }
+        .toggle-desc { font-size: 11px; color: #888; margin-top: 2px; }
+        .toggle-switch { position: relative; width: 48px; height: 28px; flex-shrink: 0; }
         .toggle-switch input { opacity: 0; width: 0; height: 0; }
         .toggle-slider {
             position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
@@ -77,6 +61,21 @@
         }
         .toggle-switch input:checked + .toggle-slider { background: #43e97b; }
         .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+        .btn-save {
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer;
+            margin-top: 4px;
+        }
+        .btn-save:active { opacity: 0.8; }
+        .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+        .loading { text-align: center; padding: 60px 20px; color: white; font-size: 16px; }
+        .loading-spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .success-msg { text-align: center; padding: 40px 20px; }
+        .success-msg .icon { font-size: 48px; margin-bottom: 12px; }
+        .success-msg p { color: #333; font-size: 16px; line-height: 1.6; }
+        .error-msg { text-align: center; padding: 40px 20px; }
+        .error-msg p { color: #666; font-size: 14px; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -191,6 +190,7 @@
             });
 
             const freeText = currentProfile && currentProfile.free_text ? currentProfile.free_text : "";
+            const goal = currentProfile && currentProfile.goal ? currentProfile.goal : "";
 
             let reminderOptions = "";
             REMINDER_OPTIONS.forEach(r => {
@@ -199,18 +199,19 @@
             });
 
             app.innerHTML = `
+                <!-- カード1: 目標 -->
                 <div class="card">
-                    <div class="card-header">
-                        <h1>⚙️ 朝活設定</h1>
-                        <p>設定した内容で宣言が自動生成されます</p>
-                        <p style="font-size:12px; color:#999; margin-top:4px;">配信頻度の変更・停止もこちらから</p>
+                    <div class="section-title"><span class="icon">🎯</span> あなたの目標</div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <input type="text" id="goal" value="${goal}"
+                               placeholder="朝活を通じて達成したいこと">
+                        <p class="hint">マイレージ画面に表示されます</p>
                     </div>
-                    <div class="form-group">
-                        <label>あなたの目標</label>
-                        <input type="text" id="goal" value="${currentProfile && currentProfile.goal ? currentProfile.goal : ''}"
-                               placeholder="朝活を通じて達成したいこと（例: 英語力を上げる）">
-                        <p style="font-size:11px; color:#999; margin-top:4px;">マイレージ画面に表示されます</p>
-                    </div>
+                </div>
+
+                <!-- カード2: 朝活宣言 -->
+                <div class="card">
+                    <div class="section-title"><span class="icon">🌅</span> 朝活宣言の設定</div>
                     <div class="form-group">
                         <label>起床時間</label>
                         <div class="select-wrapper">
@@ -223,33 +224,35 @@
                         <input type="text" class="free-text" id="freeText" value="${freeText}"
                                placeholder="その他（自由入力）" oninput="updatePreview()">
                     </div>
-                    <div class="form-group">
-                        <label>朝活リマインド頻度</label>
-                        <div class="select-wrapper">
-                            <select id="reminderFreq" onchange="updateReminderHint()">${reminderOptions}</select>
-                        </div>
-                        <p class="reminder-hint" id="reminderHint"></p>
-                    </div>
-                    <div class="form-group">
-                        <label>通知設定</label>
-                        <div class="toggle-row">
-                            <div>
-                                <div class="toggle-label">週次ふりかえり通知</div>
-                                <div class="toggle-desc">毎週月曜に今週の活動レポート</div>
-                            </div>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="weeklyReview" ${currentProfile && currentProfile.weekly_review === "off" ? "" : "checked"}>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="preview" id="preview">
+                    <div class="preview">
                         <div class="preview-label">宣言プレビュー</div>
                         <div class="preview-text" id="previewText">朝活します.</div>
                     </div>
-                    <button class="btn-save" id="saveBtn" onclick="saveProfile()">保存する</button>
                 </div>
+
+                <!-- カード3: 通知 -->
+                <div class="card">
+                    <div class="section-title"><span class="icon">🔔</span> 通知設定</div>
+                    <div class="form-group">
+                        <label>朝活リマインド</label>
+                        <div class="select-wrapper">
+                            <select id="reminderFreq" onchange="updateReminderHint()">${reminderOptions}</select>
+                        </div>
+                        <p class="hint" id="reminderHint"></p>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <div class="toggle-label">週次ふりかえり</div>
+                            <div class="toggle-desc">毎週月曜に活動レポートが届きます</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="weeklyReview" ${currentProfile && currentProfile.weekly_review === "off" ? "" : "checked"}>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn-save" id="saveBtn" onclick="saveProfile()">保存する</button>
             `;
             updatePreview();
             updateReminderHint();
@@ -267,7 +270,7 @@
                 none: "朝活確認のLINEメッセージは届きません（配信停止）",
             };
             el.textContent = hints[val] || "";
-            el.className = val === "none" ? "reminder-hint stop" : "reminder-hint";
+            el.className = val === "none" ? "hint stop" : "hint";
         }
 
         function toggleActivity(el) { el.classList.toggle("selected"); updatePreview(); }
