@@ -56,6 +56,27 @@
         .success-msg p { color: #333; font-size: 16px; line-height: 1.6; }
         .error-msg { text-align: center; padding: 40px 20px; }
         .error-msg p { color: #666; font-size: 14px; line-height: 1.6; }
+        .toggle-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 0; border-bottom: 1px solid #f0f0f0;
+        }
+        .toggle-row:last-child { border-bottom: none; }
+        .toggle-label { font-size: 14px; color: #333; }
+        .toggle-desc { font-size: 12px; color: #888; margin-top: 2px; }
+        .toggle-switch {
+            position: relative; width: 48px; height: 28px; flex-shrink: 0;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background: #ccc; border-radius: 28px; transition: 0.3s;
+        }
+        .toggle-slider::before {
+            content: ""; position: absolute; height: 22px; width: 22px; left: 3px; bottom: 3px;
+            background: white; border-radius: 50%; transition: 0.3s;
+        }
+        .toggle-switch input:checked + .toggle-slider { background: #43e97b; }
+        .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
     </style>
 </head>
 <body>
@@ -203,6 +224,20 @@
                         </div>
                         <p class="reminder-hint" id="reminderHint"></p>
                     </div>
+                    <div class="form-group">
+                        <label>通知設定</label>
+                        <div class="toggle-row">
+                            <div>
+                                <div class="toggle-label">週次ふりかえり通知</div>
+                                <div class="toggle-desc">毎週月曜に今週の活動レポート</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="weeklyReview" ${currentProfile && currentProfile.weekly_review === "off" ? "" : "checked"}>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="preview" id="preview">
                         <div class="preview-label">宣言プレビュー</div>
                         <div class="preview-text" id="previewText">朝活します.</div>
@@ -261,6 +296,7 @@
                 activities: getSelectedActivities().join(","),
                 free_text: document.getElementById("freeText").value.trim(),
                 reminder_freq: document.getElementById("reminderFreq").value,
+                weekly_review: document.getElementById("weeklyReview").checked ? "on" : "off",
             };
             try {
                 const resp = await fetch(`${API_BASE}/api/profile`, {
