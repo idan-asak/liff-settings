@@ -15,181 +15,45 @@
             align-items: flex-start;
             padding: 20px;
         }
-        .container {
-            width: 100%;
-            max-width: 400px;
-            margin-top: 10px;
+        .container { width: 100%; max-width: 400px; margin-top: 10px; }
+        .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .card-header { text-align: center; margin-bottom: 20px; }
+        .card-header h1 { font-size: 20px; color: #333; }
+        .card-header p { font-size: 13px; color: #888; margin-top: 4px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px; }
+        .form-group select, .form-group input[type="text"] {
+            width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;
+            font-size: 16px; color: #333; background: #fafafa; appearance: none; -webkit-appearance: none;
         }
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        .card-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .card-header h1 {
-            font-size: 20px;
-            color: #333;
-        }
-        .card-header p {
-            font-size: 13px;
-            color: #888;
-            margin-top: 4px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        .form-group select,
-        .form-group input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 16px;
-            color: #333;
-            background: #fafafa;
-            appearance: none;
-            -webkit-appearance: none;
-        }
-        .form-group select:focus,
-        .form-group input[type="text"]:focus {
-            outline: none;
-            border-color: #43e97b;
-            background: white;
-        }
-        .select-wrapper {
-            position: relative;
-        }
-        .select-wrapper::after {
-            content: "\25BC";
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 12px;
-            color: #999;
-            pointer-events: none;
-        }
-        .activity-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
+        .form-group select:focus, .form-group input[type="text"]:focus { outline: none; border-color: #43e97b; background: white; }
+        .select-wrapper { position: relative; }
+        .select-wrapper::after { content: "\25BC"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 12px; color: #999; pointer-events: none; }
+        .activity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .activity-btn {
-            padding: 10px 8px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            background: #fafafa;
-            font-size: 14px;
-            color: #555;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
-            user-select: none;
+            padding: 10px 8px; border: 2px solid #e0e0e0; border-radius: 10px; background: #fafafa;
+            font-size: 14px; color: #555; cursor: pointer; text-align: center; transition: all 0.2s; user-select: none;
         }
-        .activity-btn.selected {
-            border-color: #43e97b;
-            background: #e8faf0;
-            color: #2d8a56;
-            font-weight: 600;
-        }
+        .activity-btn.selected { border-color: #43e97b; background: #e8faf0; color: #2d8a56; font-weight: 600; }
+        .free-text { width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; color: #333; background: #fafafa; margin-top: 8px; }
+        .free-text:focus { outline: none; border-color: #43e97b; background: white; }
         .btn-save {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 8px;
-            transition: opacity 0.2s;
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 8px;
         }
-        .btn-save:active {
-            opacity: 0.8;
-        }
-        .btn-save:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .btn-declare {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        .btn-declare:active {
-            opacity: 0.8;
-        }
-        .preview {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 16px;
-            margin-top: 16px;
-            text-align: center;
-        }
-        .preview-label {
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 6px;
-        }
-        .preview-text {
-            font-size: 16px;
-            color: #333;
-            font-weight: 600;
-        }
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-            color: white;
-            font-size: 16px;
-        }
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 16px;
-        }
+        .btn-save:active { opacity: 0.8; }
+        .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+        .preview { background: #f8f9fa; border-radius: 10px; padding: 16px; margin-top: 16px; text-align: center; }
+        .preview-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+        .preview-text { font-size: 16px; color: #333; font-weight: 600; }
+        .loading { text-align: center; padding: 60px 20px; color: white; font-size: 16px; }
+        .loading-spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .success-msg {
-            text-align: center;
-            padding: 40px 20px;
-        }
+        .success-msg { text-align: center; padding: 40px 20px; }
         .success-msg .icon { font-size: 48px; margin-bottom: 12px; }
         .success-msg p { color: #333; font-size: 16px; line-height: 1.6; }
-        .error-msg {
-            text-align: center;
-            padding: 40px 20px;
-        }
+        .error-msg { text-align: center; padding: 40px 20px; }
         .error-msg p { color: #666; font-size: 14px; line-height: 1.6; }
-        .declare-preview {
-            text-align: center;
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-        .declare-preview .greeting { font-size: 14px; color: #888; margin-bottom: 8px; }
-        .declare-preview .text { font-size: 20px; color: #333; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -202,7 +66,6 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
-        // ── 設定 ──
         const LIFF_ID = "2006372055-RM8L5miT";
         const API_BASE = "https://api.asa-plant.com";
 
@@ -210,10 +73,10 @@
             { id: "読書", label: "📖 読書" },
             { id: "勉強", label: "💻 勉強" },
             { id: "運動", label: "💪 運動" },
-            { id: "副業・創作", label: "✍️ 副業・創作" },
+            { id: "副業", label: "✍️ 副業" },
+            { id: "創作", label: "🎨 創作" },
             { id: "仕事", label: "💼 仕事" },
             { id: "瞑想・ストレッチ", label: "🧘 瞑想・ストレッチ" },
-            { id: "その他", label: "🎵 その他" },
         ];
 
         const REMINDER_OPTIONS = [
@@ -227,125 +90,90 @@
         let lineUserId = null;
         let currentProfile = null;
 
-        // ── 初期化 ──
         async function init() {
             try {
                 await liff.init({ liffId: LIFF_ID });
-
-                if (!liff.isLoggedIn()) {
-                    liff.login();
-                    return;
-                }
-
+                if (!liff.isLoggedIn()) { liff.login(); return; }
                 const profile = await liff.getProfile();
                 lineUserId = profile.userId;
-
-                // モード判定
                 const params = new URLSearchParams(location.search);
-                const mode = params.get("mode");
-
-                if (mode === "declare") {
-                    await runDeclareMode(profile.displayName);
+                if (params.get("mode") === "declare") {
+                    await runDeclareMode();
                 } else {
-                    await runSettingsMode(profile.displayName);
+                    await runSettingsMode();
                 }
             } catch (e) {
                 showError("初期化エラー: " + e.message);
             }
         }
 
-        // ── 宣言モード ──
-        async function runDeclareMode(displayName) {
+        async function runDeclareMode() {
             try {
-                // LIFF内ブラウザでなければ sendMessages は使えない
-                if (!liff.isInClient()) {
-                    showError("LINEアプリから開いてください");
-                    return;
-                }
-
+                if (!liff.isInClient()) { showError("LINEアプリから開いてください"); return; }
                 let declareText = "朝活します.";
                 try {
                     const resp = await fetch(`${API_BASE}/api/profile?line_user_id=${lineUserId}`);
                     if (resp.ok) {
                         const data = await resp.json();
-                        if (data.found) {
-                            currentProfile = data;
-                            declareText = buildDeclareText(data);
-                        }
+                        if (data.found) declareText = buildDeclareText(data);
                     }
-                } catch (apiErr) {
-                    // API失敗時はデフォルトテキストで宣言（機能を止めない）
-                }
-
+                } catch (apiErr) {}
                 await liff.sendMessages([{ type: "text", text: declareText }]);
                 liff.closeWindow();
             } catch (e) {
-                showError("宣言の送信に失敗しました: " + e.message + "\n\nisInClient: " + liff.isInClient() + "\nOS: " + liff.getOS());
+                showError("宣言の送信に失敗しました: " + e.message);
             }
         }
 
         function buildDeclareText(profile) {
             const hasTime = profile.wake_time && profile.wake_time.trim();
-            const activities = profile.activities
-                ? profile.activities.split(",").filter(a => a.trim())
-                : [];
+            const activities = profile.activities ? profile.activities.split(",").filter(a => a.trim()) : [];
+            const freeText = profile.free_text ? profile.free_text.trim() : "";
+            const allActivities = [...activities];
+            if (freeText) allActivities.push(freeText);
 
-            if (hasTime && activities.length > 0) {
-                return `${profile.wake_time}に起きて${activities.join("と")}をします.`;
-            } else if (hasTime) {
-                return `${profile.wake_time}に起きて朝活します.`;
-            } else if (activities.length > 0) {
-                return `${activities.join("と")}をします.`;
-            }
+            if (hasTime && allActivities.length > 0) return `${profile.wake_time}に起きて${allActivities.join("と")}をします.`;
+            if (hasTime) return `${profile.wake_time}に起きて朝活します.`;
+            if (allActivities.length > 0) return `${allActivities.join("と")}をします.`;
             return "朝活します.";
         }
 
-        // ── 設定モード ──
-        async function runSettingsMode(displayName) {
-            // 既存設定を取得
+        async function runSettingsMode() {
             try {
                 const resp = await fetch(`${API_BASE}/api/profile?line_user_id=${lineUserId}`);
                 const data = await resp.json();
                 if (data.found) currentProfile = data;
-            } catch (e) {
-                // 初回は未設定なのでエラーではない
-            }
-
-            renderSettingsForm(displayName);
+            } catch (e) {}
+            renderSettingsForm();
         }
 
-        function renderSettingsForm(displayName) {
+        function renderSettingsForm() {
             const app = document.getElementById("app");
 
-            // 起床時間の選択肢を生成
-            let timeOptions = "";
-            for (let h = 4; h <= 7; h++) {
-                for (let m = 0; m < 60; m += 30) {
+            let timeOptions = '<option value="">指定しない</option>';
+            for (let h = 3; h <= 9; h++) {
+                for (let m = 0; m < 60; m += 15) {
                     const val = String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
                     const sel = currentProfile && currentProfile.wake_time === val ? "selected" : "";
                     timeOptions += `<option value="${val}" ${sel}>${val}</option>`;
                 }
             }
 
-            // 活動ボタン
             const selectedActivities = currentProfile && currentProfile.activities
-                ? currentProfile.activities.split(",").map(a => a.trim())
-                : [];
-
+                ? currentProfile.activities.split(",").map(a => a.trim()) : [];
             let activityBtns = "";
             ACTIVITIES.forEach(a => {
                 const sel = selectedActivities.includes(a.id) ? "selected" : "";
                 activityBtns += `<div class="activity-btn ${sel}" data-id="${a.id}" onclick="toggleActivity(this)">${a.label}</div>`;
             });
 
-            // リマインダー選択肢
+            const freeText = currentProfile && currentProfile.free_text ? currentProfile.free_text : "";
+
             let reminderOptions = "";
             REMINDER_OPTIONS.forEach(r => {
                 const sel = currentProfile && currentProfile.reminder_freq === r.value ? "selected" : "";
                 reminderOptions += `<option value="${r.value}" ${sel}>${r.label}</option>`;
             });
-
-            const nickname = currentProfile ? currentProfile.nickname : (displayName || "");
 
             app.innerHTML = `
                 <div class="card">
@@ -353,131 +181,88 @@
                         <h1>⚙️ 朝活設定</h1>
                         <p>設定した内容で宣言が自動生成されます</p>
                     </div>
-
                     <div class="form-group">
                         <label>起床時間</label>
                         <div class="select-wrapper">
-                            <select id="wakeTime" onchange="updatePreview()">
-                                ${timeOptions}
-                            </select>
+                            <select id="wakeTime" onchange="updatePreview()">${timeOptions}</select>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label>やること（複数選択OK）</label>
-                        <div class="activity-grid" id="activityGrid">
-                            ${activityBtns}
-                        </div>
+                        <div class="activity-grid" id="activityGrid">${activityBtns}</div>
+                        <input type="text" class="free-text" id="freeText" value="${freeText}"
+                               placeholder="その他（自由入力）" oninput="updatePreview()">
                     </div>
-
-                    <div class="form-group">
-                        <label>ニックネーム</label>
-                        <input type="text" id="nickname" value="${nickname}" placeholder="表示名（任意）">
-                    </div>
-
                     <div class="form-group">
                         <label>朝活リマインド頻度</label>
                         <div class="select-wrapper">
-                            <select id="reminderFreq">
-                                ${reminderOptions}
-                            </select>
+                            <select id="reminderFreq">${reminderOptions}</select>
                         </div>
                     </div>
-
                     <div class="preview" id="preview">
                         <div class="preview-label">宣言プレビュー</div>
                         <div class="preview-text" id="previewText">朝活します.</div>
                     </div>
-
                     <button class="btn-save" id="saveBtn" onclick="saveProfile()">保存する</button>
                 </div>
             `;
-
             updatePreview();
         }
 
-        function toggleActivity(el) {
-            el.classList.toggle("selected");
-            updatePreview();
-        }
+        function toggleActivity(el) { el.classList.toggle("selected"); updatePreview(); }
 
         function getSelectedActivities() {
-            const btns = document.querySelectorAll(".activity-btn.selected");
-            return Array.from(btns).map(b => b.dataset.id);
+            return Array.from(document.querySelectorAll(".activity-btn.selected")).map(b => b.dataset.id);
         }
 
         function updatePreview() {
             const wakeTime = document.getElementById("wakeTime").value;
             const activities = getSelectedActivities();
+            const freeText = document.getElementById("freeText").value.trim();
+            const all = [...activities];
+            if (freeText) all.push(freeText);
 
             let text;
-            if (wakeTime && activities.length > 0) {
-                text = `${wakeTime}に起きて${activities.join("と")}をします.`;
-            } else if (wakeTime) {
-                text = `${wakeTime}に起きて朝活します.`;
-            } else if (activities.length > 0) {
-                text = `${activities.join("と")}をします.`;
-            } else {
-                text = "朝活します.";
-            }
+            if (wakeTime && all.length > 0) text = `${wakeTime}に起きて${all.join("と")}をします.`;
+            else if (wakeTime) text = `${wakeTime}に起きて朝活します.`;
+            else if (all.length > 0) text = `${all.join("と")}をします.`;
+            else text = "朝活します.";
 
-            const previewEl = document.getElementById("previewText");
-            if (previewEl) previewEl.textContent = text;
+            const el = document.getElementById("previewText");
+            if (el) el.textContent = text;
         }
 
         async function saveProfile() {
             const btn = document.getElementById("saveBtn");
-            btn.disabled = true;
-            btn.textContent = "保存中...";
-
+            btn.disabled = true; btn.textContent = "保存中...";
             const body = {
                 line_user_id: lineUserId,
                 wake_time: document.getElementById("wakeTime").value,
                 activities: getSelectedActivities().join(","),
-                nickname: document.getElementById("nickname").value.trim(),
+                free_text: document.getElementById("freeText").value.trim(),
                 reminder_freq: document.getElementById("reminderFreq").value,
             };
-
             try {
                 const resp = await fetch(`${API_BASE}/api/profile`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    method: "POST", headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(body),
                 });
-
                 if (!resp.ok) throw new Error("保存に失敗しました");
-
-                const app = document.getElementById("app");
-                app.innerHTML = `
-                    <div class="card">
-                        <div class="success-msg">
-                            <div class="icon">✅</div>
-                            <p>設定を保存しました！</p>
-                            <p style="font-size:13px; color:#888; margin-top:12px;">
-                                次回の宣言から反映されます
-                            </p>
-                        </div>
-                    </div>
-                `;
-
-                setTimeout(() => {
-                    if (liff.isInClient()) liff.closeWindow();
-                }, 1500);
+                document.getElementById("app").innerHTML = `
+                    <div class="card"><div class="success-msg">
+                        <div class="icon">✅</div>
+                        <p>設定を保存しました！</p>
+                        <p style="font-size:13px; color:#888; margin-top:12px;">次回の宣言から反映されます</p>
+                    </div></div>`;
+                setTimeout(() => { if (liff.isInClient()) liff.closeWindow(); }, 1500);
             } catch (e) {
-                btn.disabled = false;
-                btn.textContent = "保存する";
+                btn.disabled = false; btn.textContent = "保存する";
                 alert("保存に失敗しました: " + e.message);
             }
         }
 
         function showError(msg) {
-            document.getElementById("app").innerHTML = `
-                <div class="card">
-                    <div class="error-msg">
-                        <p>${msg}</p>
-                    </div>
-                </div>
-            `;
+            document.getElementById("app").innerHTML = `<div class="card"><div class="error-msg"><p>${msg}</p></div></div>`;
         }
 
         init();
