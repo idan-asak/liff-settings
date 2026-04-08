@@ -268,13 +268,19 @@
                     body: JSON.stringify(body),
                 });
                 if (!resp.ok) throw new Error("保存に失敗しました");
-                document.getElementById("app").innerHTML = `
-                    <div class="card"><div class="success-msg">
+                const isStop = body.reminder_freq === "none";
+                document.getElementById("app").innerHTML = isStop
+                    ? `<div class="card"><div class="success-msg">
+                        <div class="icon">🔕</div>
+                        <p>配信を停止しました</p>
+                        <p style="font-size:13px; color:#888; margin-top:12px;">配信を再開したいときは、もう一度この設定画面から頻度を変更してください</p>
+                    </div></div>`
+                    : `<div class="card"><div class="success-msg">
                         <div class="icon">✅</div>
                         <p>設定を保存しました！</p>
                         <p style="font-size:13px; color:#888; margin-top:12px;">次回の宣言から反映されます</p>
                     </div></div>`;
-                setTimeout(() => { if (liff.isInClient()) liff.closeWindow(); }, 1500);
+                setTimeout(() => { if (liff.isInClient()) liff.closeWindow(); }, 2000);
             } catch (e) {
                 btn.disabled = false; btn.textContent = "保存する";
                 alert("保存に失敗しました: " + e.message);
