@@ -257,20 +257,30 @@
         // ── 宣言モード ──
         async function runDeclareMode(displayName) {
             try {
-                const resp = await fetch(`${API_BASE}/api/profile?line_user_id=${lineUserId}`);
-                const data = await resp.json();
-
-                let declareText = "朝活します.";
-                if (data.found) {
-                    currentProfile = data;
-                    declareText = buildDeclareText(data);
+                // LIFF内ブラウザでなければ sendMessages は使えない
+                if (!liff.isInClient()) {
+                    showError("LINEアプリから開いてください");
+                    return;
                 }
 
-                // liff.sendMessages でチャットに送信
+                let declareText = "朝活します.";
+                try {
+                    const resp = await fetch(`${API_BASE}/api/profile?line_user_id=${lineUserId}`);
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        if (data.found) {
+                            currentProfile = data;
+                            declareText = buildDeclareText(data);
+                        }
+                    }
+                } catch (apiErr) {
+                    // API失敗時はデフォルトテキストで宣言（機能を止めない）
+                }
+
                 await liff.sendMessages([{ type: "text", text: declareText }]);
                 liff.closeWindow();
             } catch (e) {
-                showError("宣言の送信に失敗しました: " + e.message);
+                showError("宣言の送信に失敗しました: " + e.message + "\n\nisInClient: " + liff.isInClient() + "\nOS: " + liff.getOS());
             }
         }
 
