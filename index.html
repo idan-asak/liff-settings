@@ -62,9 +62,9 @@
         .toggle-switch input:checked + .toggle-slider { background: #43e97b; }
         .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
         .btn-save {
-            width: 100%; padding: 14px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer;
-            margin-top: 4px;
+            width: 100%; padding: 16px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white; border: none; border-radius: 12px; font-size: 17px; font-weight: 700; cursor: pointer;
+            margin-top: 4px; box-shadow: 0 4px 12px rgba(67, 233, 123, 0.4); letter-spacing: 1px;
         }
         .btn-save:active { opacity: 0.8; }
         .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -98,7 +98,6 @@
             { id: "副業", label: "✍️ 副業" },
             { id: "創作", label: "🎨 創作" },
             { id: "仕事", label: "💼 仕事" },
-            { id: "瞑想・ストレッチ", label: "🧘 瞑想・ストレッチ" },
         ];
 
         const REMINDER_OPTIONS = [
@@ -202,9 +201,10 @@
                 <!-- カード1: 目標 -->
                 <div class="card">
                     <div class="section-title"><span class="icon">🎯</span> あなたの目標</div>
+                    <p style="font-size:13px; color:#666; line-height:1.6; margin-bottom:12px;">目標を言葉にすると、毎日の朝活が「何のためにやっているか」とつながります。続けやすくなる一番のコツです。</p>
                     <div class="form-group" style="margin-bottom:0;">
                         <input type="text" id="goal" value="${goal}"
-                               placeholder="朝活を通じて達成したいこと">
+                               placeholder="例: TOEIC 800点を取る">
                         <p class="hint">マイレージ画面に表示されます</p>
                     </div>
                 </div>
@@ -263,7 +263,7 @@
             if (!el) return;
             const val = document.getElementById("reminderFreq").value;
             const hints = {
-                daily: "毎朝10時にLINEで朝活確認が届きます",
+                daily: "",
                 weekday: "月〜金の朝10時にLINEで届きます",
                 "3days": "月・水・金の朝10時にLINEで届きます",
                 weekend: "土・日の朝10時にLINEで届きます",
