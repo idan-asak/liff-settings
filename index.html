@@ -37,6 +37,8 @@
         .activity-btn.selected { border-color: #43e97b; background: #e8faf0; color: #2d8a56; font-weight: 600; }
         .free-text { width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; color: #333; background: #fafafa; margin-top: 8px; }
         .free-text:focus { outline: none; border-color: #43e97b; background: white; }
+        .reminder-hint { font-size: 12px; color: #888; margin-top: 6px; line-height: 1.5; }
+        .reminder-hint.stop { color: #e65100; }
         .btn-save {
             width: 100%; padding: 14px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 8px;
@@ -196,8 +198,9 @@
                     <div class="form-group">
                         <label>朝活リマインド頻度</label>
                         <div class="select-wrapper">
-                            <select id="reminderFreq">${reminderOptions}</select>
+                            <select id="reminderFreq" onchange="updateReminderHint()">${reminderOptions}</select>
                         </div>
+                        <p class="reminder-hint" id="reminderHint"></p>
                     </div>
                     <div class="preview" id="preview">
                         <div class="preview-label">宣言プレビュー</div>
@@ -207,6 +210,22 @@
                 </div>
             `;
             updatePreview();
+            updateReminderHint();
+        }
+
+        function updateReminderHint() {
+            const el = document.getElementById("reminderHint");
+            if (!el) return;
+            const val = document.getElementById("reminderFreq").value;
+            const hints = {
+                daily: "毎朝10時にLINEで朝活確認が届きます",
+                weekday: "月〜金の朝10時にLINEで届きます",
+                "3days": "月・水・金の朝10時にLINEで届きます",
+                weekend: "土・日の朝10時にLINEで届きます",
+                none: "朝活確認のLINEメッセージは届きません（配信停止）",
+            };
+            el.textContent = hints[val] || "";
+            el.className = val === "none" ? "reminder-hint stop" : "reminder-hint";
         }
 
         function toggleActivity(el) { el.classList.toggle("selected"); updatePreview(); }
