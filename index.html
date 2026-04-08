@@ -37,7 +37,7 @@
             font-size: 14px; color: #555; cursor: pointer; text-align: center; transition: all 0.2s; user-select: none;
         }
         .activity-btn.selected { border-color: #43e97b; background: #e8faf0; color: #2d8a56; font-weight: 600; }
-        .free-text { width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; color: #333; background: #fafafa; margin-top: 8px; }
+        .free-text { width: 100%; padding: 10px 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; color: #333; background: #fafafa; margin-top: 8px; resize: none; }
         .free-text:focus { outline: none; border-color: #43e97b; background: white; }
         .hint { font-size: 11px; color: #999; margin-top: 4px; line-height: 1.5; }
         .hint.stop { color: #e65100; }
@@ -149,9 +149,8 @@
         function buildDeclareText(profile) {
             const hasTime = profile.wake_time && profile.wake_time.trim();
             const activities = profile.activities ? profile.activities.split(",").filter(a => a.trim()) : [];
-            const freeText = profile.free_text ? profile.free_text.trim() : "";
-            const allActivities = [...activities];
-            if (freeText) allActivities.push(freeText);
+            const freeItems = profile.free_text ? profile.free_text.split(",").map(s => s.trim()).filter(s => s) : [];
+            const allActivities = [...activities, ...freeItems];
 
             if (hasTime && allActivities.length > 0) return `${profile.wake_time}に起きて${allActivities.join("と")}をします.`;
             if (hasTime) return `${profile.wake_time}に起きて朝活します.`;
@@ -188,7 +187,8 @@
                 activityBtns += `<div class="activity-btn ${sel}" data-id="${a.id}" onclick="toggleActivity(this)">${a.label}</div>`;
             });
 
-            const freeText = currentProfile && currentProfile.free_text ? currentProfile.free_text : "";
+            const freeTextRaw = currentProfile && currentProfile.free_text ? currentProfile.free_text : "";
+            const freeText = freeTextRaw.replace(/,/g, "\n");
             const goal = currentProfile && currentProfile.goal ? currentProfile.goal : "";
 
             let reminderOptions = "";
@@ -221,8 +221,8 @@
                     <div class="form-group">
                         <label>やること（複数選択OK）</label>
                         <div class="activity-grid" id="activityGrid">${activityBtns}</div>
-                        <input type="text" class="free-text" id="freeText" value="${freeText}"
-                               placeholder="その他（自由入力）" oninput="updatePreview()">
+                        <textarea class="free-text" id="freeText" rows="2"
+                               placeholder="その他（1行に1つ）" oninput="updatePreview()">${freeText}</textarea>
                     </div>
                     <div class="preview">
                         <div class="preview-label">宣言プレビュー</div>
@@ -282,9 +282,8 @@
         function updatePreview() {
             const wakeTime = document.getElementById("wakeTime").value;
             const activities = getSelectedActivities();
-            const freeText = document.getElementById("freeText").value.trim();
-            const all = [...activities];
-            if (freeText) all.push(freeText);
+            const freeItems = document.getElementById("freeText").value.trim().split("\n").map(s => s.trim()).filter(s => s);
+            const all = [...activities, ...freeItems];
 
             let text;
             if (wakeTime && all.length > 0) text = `${wakeTime}に起きて${all.join("と")}をします.`;
@@ -303,7 +302,7 @@
                 line_user_id: lineUserId,
                 wake_time: document.getElementById("wakeTime").value,
                 activities: getSelectedActivities().join(","),
-                free_text: document.getElementById("freeText").value.trim(),
+                free_text: document.getElementById("freeText").value.trim().split("\n").map(s => s.trim()).filter(s => s).join(","),
                 reminder_freq: document.getElementById("reminderFreq").value,
                 weekly_review: document.getElementById("weeklyReview").checked ? "on" : "off",
                 goal: document.getElementById("goal").value.trim(),
