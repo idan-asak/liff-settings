@@ -212,6 +212,16 @@
                 <!-- カード2: 朝活宣言 -->
                 <div class="card">
                     <div class="section-title"><span class="icon">🌅</span> 朝活宣言の設定</div>
+                    <div class="toggle-row" style="margin-bottom:16px;">
+                        <div>
+                            <div class="toggle-label">簡易宣言モード</div>
+                            <div class="toggle-desc">配信の「朝活します」ボタン1タップで宣言（時刻は選択式）</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="declareMode" ${currentProfile && currentProfile.declare_mode === "simple" ? "checked" : ""}>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
                     <div class="form-group">
                         <label>起床時間</label>
                         <div class="select-wrapper">
@@ -306,6 +316,7 @@
                 reminder_freq: document.getElementById("reminderFreq").value,
                 weekly_review: document.getElementById("weeklyReview").checked ? "on" : "off",
                 goal: document.getElementById("goal").value.trim(),
+                declare_mode: document.getElementById("declareMode").checked ? "simple" : "full",
             };
             try {
                 const resp = await fetch(`${API_BASE}/api/profile`, {
