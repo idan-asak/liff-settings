@@ -90,6 +90,22 @@
         .btn-discord:active { opacity: 0.8; }
         .btn-discord:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn-discord svg { width: 20px; height: 20px; fill: white; }
+        .history-list { list-style: none; }
+        .history-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 12px; border-bottom: 1px solid #f0f0f0; gap: 8px;
+        }
+        .history-item:last-child { border-bottom: none; }
+        .history-item .history-info { flex: 1; min-width: 0; }
+        .history-item .history-text { font-size: 14px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .history-item .history-time { font-size: 11px; color: #999; margin-top: 2px; }
+        .btn-delete {
+            padding: 6px 12px; background: #fff0f0; color: #d32f2f; border: 1px solid #ffcdd2;
+            border-radius: 8px; font-size: 12px; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+        }
+        .btn-delete:active { opacity: 0.7; }
+        .btn-delete:disabled { opacity: 0.4; cursor: not-allowed; }
+        .history-empty { text-align: center; padding: 20px; color: #999; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -346,10 +362,19 @@
                     }
                 </div>
 
+                <!-- カード5: 送信履歴 -->
+                <div class="card">
+                    <div class="section-title"><span class="icon">📋</span> 送信履歴</div>
+                    <div id="historyArea">
+                        <div class="history-empty">読み込み中...</div>
+                    </div>
+                </div>
+
                 <button class="btn-save" id="saveBtn" onclick="saveProfile()">保存する</button>
             `;
             updatePreview();
             updateReminderHint();
+            loadDeclarationHistory();
         }
 
         function updateReminderHint() {
@@ -424,6 +449,68 @@
             } catch (e) {
                 btn.disabled = false; btn.textContent = "保存する";
                 alert("保存に失敗しました: " + e.message);
+            }
+        }
+
+        async function loadDeclarationHistory() {
+            const area = document.getElementById("historyArea");
+            if (!area) return;
+            try {
+                const resp = await fetch(`${API_BASE}/api/declarations?line_user_id=${lineUserId}`);
+                if (!resp.ok) throw new Error("取得失敗");
+                const data = await resp.json();
+                const items = data.declarations || [];
+                if (items.length === 0) {
+                    area.innerHTML = '<div class="history-empty">送信履歴はありません</div>';
+                    return;
+                }
+                let html = '<ul class="history-list">';
+                for (const item of items) {
+                    const text = item.declaration_text || "宣言";
+                    const time = item.created_at || "";
+                    html += `<li class="history-item" id="decl-${item.id}">
+                        <div class="history-info">
+                            <div class="history-text">${escapeHtml(text)}</div>
+                            <div class="history-time">${escapeHtml(time)}</div>
+                        </div>
+                        <button class="btn-delete" onclick="deleteDeclaration(${item.id}, this)">取り消し</button>
+                    </li>`;
+                }
+                html += '</ul>';
+                area.innerHTML = html;
+            } catch (e) {
+                area.innerHTML = '<div class="history-empty">履歴の取得に失敗しました</div>';
+            }
+        }
+
+        function escapeHtml(str) {
+            const d = document.createElement("div");
+            d.textContent = str;
+            return d.innerHTML;
+        }
+
+        async function deleteDeclaration(id, btn) {
+            if (!confirm("この宣言をDiscordから削除しますか？")) return;
+            btn.disabled = true;
+            btn.textContent = "削除中...";
+            try {
+                const resp = await fetch(`${API_BASE}/api/declarations/${id}?line_user_id=${lineUserId}`, {
+                    method: "DELETE",
+                });
+                if (!resp.ok) {
+                    const err = await resp.json().catch(() => ({}));
+                    throw new Error(err.detail || "削除に失敗しました");
+                }
+                const li = document.getElementById(`decl-${id}`);
+                if (li) {
+                    li.style.opacity = "0.3";
+                    li.style.textDecoration = "line-through";
+                    btn.textContent = "削除済み";
+                }
+            } catch (e) {
+                alert("削除に失敗しました: " + e.message);
+                btn.disabled = false;
+                btn.textContent = "取り消し";
             }
         }
 
