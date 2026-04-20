@@ -76,6 +76,18 @@
         .success-msg p { color: #333; font-size: 16px; line-height: 1.6; }
         .error-msg { text-align: center; padding: 40px 20px; }
         .error-msg p { color: #666; font-size: 14px; line-height: 1.6; }
+        .stripe-status { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 10px; }
+        .stripe-status.linked { background: #ede7f6; }
+        .stripe-status.unlinked { background: #fff3e0; }
+        .stripe-status .status-icon { font-size: 24px; }
+        .stripe-status .status-text { font-size: 14px; color: #333; line-height: 1.5; }
+        .stripe-status .status-text .name { font-weight: 700; color: #667eea; }
+        .btn-stripe {
+            width: 100%; padding: 14px; background: #667eea; color: white; border: none;
+            border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px;
+        }
+        .btn-stripe:active { opacity: 0.8; }
         .discord-status { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 10px; }
         .discord-status.linked { background: #e8faf0; }
         .discord-status.unlinked { background: #fff3e0; }
@@ -141,6 +153,7 @@
         let lineUserId = null;
         let currentProfile = null;
         let discordLinkStatus = null;
+        let stripeLinkStatus = null;
 
         async function init() {
             try {
@@ -237,13 +250,15 @@
 
         async function runSettingsMode() {
             try {
-                const [profileResp, discordResp] = await Promise.all([
+                const [profileResp, discordResp, stripeResp] = await Promise.all([
                     fetch(`${API_BASE}/api/profile?line_user_id=${lineUserId}`),
                     fetch(`${API_BASE}/api/discord-link/status?line_user_id=${lineUserId}`),
+                    fetch(`${API_BASE}/api/stripe-link/status?line_user_id=${lineUserId}`),
                 ]);
                 const profileData = await profileResp.json();
                 if (profileData.found) currentProfile = profileData;
                 discordLinkStatus = await discordResp.json();
+                stripeLinkStatus = await stripeResp.json();
             } catch (e) {}
             renderSettingsForm();
         }
@@ -362,7 +377,23 @@
                     }
                 </div>
 
-                <!-- カード5: 送信履歴 -->
+                <!-- カード5: Stripe連携 -->
+                <div class="card">
+                    <div class="section-title"><span class="icon">💳</span> 決済アカウント連携</div>
+                    ${stripeLinkStatus && stripeLinkStatus.linked
+                        ? `<div class="stripe-status linked">
+                            <div class="status-icon">✅</div>
+                            <div class="status-text">連携済み: <span class="name">${stripeLinkStatus.stripe_name || "確認済み"}</span><br>朝活配信・マイレージ割引が有効です</div>
+                        </div>`
+                        : `<div class="stripe-status unlinked">
+                            <div class="status-icon">⚠️</div>
+                            <div class="status-text">決済アカウントと連携すると、朝活配信やマイレージ割引が受け取れます</div>
+                        </div>
+                        <button class="btn-stripe" onclick="openStripeLink()">連携する</button>`
+                    }
+                </div>
+
+                <!-- カード6: 送信履歴 -->
                 <div class="card">
                     <div class="section-title"><span class="icon">📋</span> 送信履歴</div>
                     <div id="historyArea">
@@ -511,6 +542,15 @@
                 alert("削除に失敗しました: " + e.message);
                 btn.disabled = false;
                 btn.textContent = "取り消し";
+            }
+        }
+
+        function openStripeLink() {
+            const url = "https://liff.line.me/2006372055-1rYAwpea";
+            if (liff.isInClient()) {
+                liff.openWindow({ url, external: false });
+            } else {
+                location.href = url;
             }
         }
 
